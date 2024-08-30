@@ -4,4 +4,5 @@
 - Console: 
 
 php bin/console plugin:refresh
+<br />
 php bin/console plugin:install --activate EEComBlog
