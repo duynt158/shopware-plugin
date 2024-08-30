@@ -1,0 +1,227 @@
+{% block sw_cms_element_eecom_blog_category_nav_config %}
+    <div class="sw-cms-el-config-blog-category-navigation">
+        {% block sw_cms_element_eecom_blog_category_nav_config_tabs %}
+        <sw-tabs
+            class="sw-cms-el-config-eecom_blog_category_nav__tabs"
+            default-item="layout"
+        >
+
+            <template slot-scope="{ active }">
+                {% block sw_cms_element_eecom_blog_category_nav_config_tab_layout %}
+                    <sw-tabs-item
+                        :title="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.tab.layout')"
+                        name="layout"
+                        :active-tab="active"
+                    >
+                        {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.tab.layout') }}
+                    </sw-tabs-item>
+                {% endblock %}
+                {% block sw_cms_element_eecom_blog_category_nav_config_tab_logo %}
+                    <sw-tabs-item
+                        :title="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.tab.logo')"
+                        name="logo"
+                        :active-tab="active"
+                    >
+                        {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.tab.logo') }}
+                    </sw-tabs-item>
+                {% endblock %}
+            </template>
+            <template
+                slot="content"
+                slot-scope="{ active }"
+            >
+                {% block sw_cms_element_eecom_blog_category_nav_config_layout %}
+                <sw-container
+                    v-if="active === 'layout'"
+                    class="sw-cms-el-config-product-slider__tab-layout"
+                >
+                    {% block sw_cms_element_eecom_blog_category_nav_config_layout_elMinHeight %}
+                        <sw-field
+                            v-model="element.config.elMinHeight.value"
+                            type="text"
+                            :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.elMinHeight')"
+                            :placeholder="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.placeholder.elMinHeight')"
+                        />
+                    {% endblock %}
+
+                    <sw-container columns="1fr 1fr" gap="0px 30px">
+                    {% block sw_cms_element_eecom_blog_category_nav_config_layout_textColor %}
+                        <sw-field
+                            v-model="element.config.textColor.value"
+                            type="colorpicker"
+                            :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.textColor')"
+                            :placeholder="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.placeholder.textColor')"
+                        />
+                    {% endblock %}
+
+
+                    </sw-container>
+                    <sw-container columns="1fr 1fr" gap="0px 30px">
+                        {% block sw_cms_element_eecom_blog_category_nav_config_layout_bgPrimaryColor %}
+                            <sw-colorpicker
+                                v-model="element.config.bgPrimaryColor.value"
+                                :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.bgPrimaryColor')"
+                                color-output="hex"
+                                :z-index="1001"
+                                :alpha="false"
+                            />
+
+
+                        {% endblock %}
+                        {% block sw_cms_element_eecom_blog_category_nav_config_layout_bgColorGradiant %}
+                            <sw-colorpicker
+                                v-model="element.config.bgColorGradiant.value"
+                                :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.bgColorGradiant')"
+                                color-output="hex"
+                                :z-index="1001"
+                                :alpha="false"
+                            />
+                        {% endblock %}
+
+                    </sw-container>
+
+                    <sw-container columns="1fr 1fr" gap="0px 30px">
+                        {% block sw_cms_element_eecom_blog_category_nav_config_layout_hoverPrimaryColor %}
+                            <sw-colorpicker
+                                v-model="element.config.hoverPrimaryColor.value"
+                                :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.hoverPrimaryColor')"
+                                color-output="hex"
+                                :z-index="1001"
+                                :alpha="false"
+                            />
+                        {% endblock %}
+                        {% block sw_cms_element_eecom_blog_category_nav_config_layout_hoverColorGradiant %}
+                            <sw-colorpicker
+                                v-model="element.config.hoverColorGradiant.value"
+                                :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.layout.config.label.hoverColorGradiant')"
+                                color-output="hex"
+                                :z-index="1001"
+                                :alpha="false"
+                            />
+
+                        {% endblock %}
+
+                    </sw-container>
+
+                </sw-container>
+                <sw-container
+                    v-if="active === 'logo'"
+                    class="sw-cms-el-config-product-slider__tab-layout"
+                >
+                    {% block sw_cms_element_eecom_blog_category_nav_config_logo_media %}
+                    <div>
+                    <label>Blog Logo</label>
+                    <sw-media-upload-v2
+                        variant="regular"
+                        :upload-tag="uploadTag"
+                        :source="previewSource"
+                        :allow-multi-select="false"
+                        :targetFolderId="mediaDefaultFolderId"
+                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                        @media-upload-sidebar-open="onOpenMediaModal"
+                        @media-upload-remove-image="onImageRemove"
+                    />
+
+                    <div
+                        slot="preview"
+                        slot-scope="{ demoValue }"
+                        class="sw-cms-el-config-image__mapping-preview"
+                    >
+                        <img
+                            v-if="demoValue.url"
+                            :src="demoValue.url"
+                        >
+                        <sw-alert
+                            v-else
+                            class="sw-cms-el-config-image__preview-info"
+                            variant="info"
+                        >
+                            {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                        </sw-alert>
+                    </div>
+                        <sw-upload-listener
+                            :upload-tag="uploadTag"
+                            auto-upload
+                            @media-upload-finish="onImageUpload"
+                        />
+
+                        {% block sw_cms_element_image_config_media_modal %}
+                            <sw-media-modal-v2
+                                v-if="mediaModalIsOpen"
+                                variant="regular"
+                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                :entity-context="cmsPageState.entityName"
+                                :allow-multi-select="false"
+                                :initial-folder-id="cmsPageState.defaultMediaFolderId"
+                                @media-upload-remove-image="onImageRemove"
+                                @media-modal-selection-change="onSelectionChanges"
+                                @modal-close="onCloseModal"
+                            />
+                        {% endblock %}
+                    </div>
+                    {% endblock %}
+
+                    {% block sw_cms_element_eecom_blog_category_nav_config_logo_displayMode %}
+                        <sw-select-field
+                            v-model="element.config.displayMode.value"
+                            :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.displayMode')"
+                        >
+                            {% block sw_cms_elementeecom_blog_single_select_config_displaymode_select_options %}
+                                <option value="standard">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.displayModeStandard') }}
+                                </option>
+                                <option value="cover">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.displayModeCover') }}
+                                </option>
+                                <option value="contain">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.displayModeContain') }}
+                                </option>
+                            {% endblock %}
+                        </sw-select-field>
+                    {% endblock %}
+                    {% block sw_cms_element_eecom_blog_category_nav_config_logo_elMinLogoHeight %}
+                        <sw-field
+                            v-model="element.config.elMinLogoHeight.value"
+                            type="text"
+                            :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.elMinLogoHeight')"
+                            :placeholder="$tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.placeholder.elMinLogoHeight')"
+                        />
+                    {% endblock %}
+                    {% block sw_cms_element_eecom_blog_single_select_config_settings_vertical_align %}
+                        <sw-select-field
+                            v-model="element.config.verticalAlign.value"
+                            :label="$tc('sw-cms.elements.general.config.label.verticalAlign')"
+                            :placeholder="$tc('sw-cms.elements.general.config.label.verticalAlign')"
+                        >
+                            {% block sw_cms_element_eecom_blog_single_select_config_settings_vertical_align_options %}
+                                <option value="flex-start">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.verticalAlignTop') }}
+                                </option>
+                                <option value="center">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.verticalAlignCenter') }}
+                                </option>
+                                <option value="flex-end">
+                                    {{ $tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.verticalAlignBottom') }}
+                                </option>
+                            {% endblock %}
+                        </sw-select-field>
+                    {% endblock %}
+                    {% block sw_cms_element_eecom_blog_category_nav_config_logo_logoUrl %}
+                        <sw-field
+                            v-model="element.config.logoUrl.value"
+                            type="url"
+                            :label="$tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.label.logoUrl')"
+                            :placeholder="$tc('eecom-blog.elements.eecomBlogCategoryNav.logo.config.placeholder.logoUrl')"
+                        />
+                    {% endblock %}
+
+                </sw-container>
+                {% endblock %}
+            </template>
+
+
+        </sw-tabs>
+        {% endblock %}
+
+    </div>
+{% endblock %}

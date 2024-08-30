@@ -1,0 +1,325 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog"/>
+        </service>
+        <service
+            id="EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogTranslation\EEComBlogTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_translation"/>
+        </service>
+
+        <service
+            id="EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogVisibility\EEComBlogVisibilityDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_visibility"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogTag\EEComBlogTagDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_tag"/>
+        </service>
+
+        <service
+            id="EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogSearchKeyword\EEComBlogSearchKeywordDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_search_keyword"/>
+        </service>
+
+        <service
+            id="EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogCategoryMapping\EEComBlogCategoryMappingDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_category_mapping"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlogCategory\EEComBlogCategoryDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_category"/>
+        </service>
+
+        <service
+            id="EECom\EEComBlog\Core\Content\EEComBlogCategory\Aggregate\EEComBlogCategoryTranslation\EEComBlogCategoryTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="eecom_blog_category_translation"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\UserExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\CmsPageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\SalesChannelExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\Extension\TagExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlogCategory\EEComBlogCategorySeoUrlRoute">
+            <argument id="EECom\EEComBlog\Core\Content\EEComBlogCategory\EEComBlogCategoryDefinition" type="service"/>
+            <tag name="shopware.seo_url.route"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlogCategory\EEComBlogCategorySeoUrlListener">
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlUpdater"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogSeoUrlRoute">
+            <argument id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition" type="service"/>
+            <tag name="shopware.seo_url.route"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogSeoUrlListener">
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlUpdater"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="EECom\EEComBlog\Controller\EEComBlogCategoryController" public="true">
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument type="service" id="Shopware\Storefront\Page\LandingPage\LandingPageLoader"/>
+            <argument id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader" type="service"/>
+            <argument type="service" id="Shopware\Core\Content\Category\SalesChannel\CategoryRoute"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="EECom\EEComBlog\Controller\EEComBlogController" public="true">
+            <argument type="service" id="EECom\EEComBlog\Storefront\Page\EEComBlog\EEComBlogPageLoader"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Data\EEComBlogActivityDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Data\EEComBlogDraftDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\VersionControlSystem\DiscardAction">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\DraftAction">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\MergeAction">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\ReleaseAsNewAction">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\VersionControlSystem\DuplicateAction">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService"/>
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+            <argument type="service" id="eecom_blog.repository"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\UpdateFromLiveVersionAction">
+            <argument id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService" type="service"/>
+            <argument id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService" type="service"/>
+            <argument id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway" type="service"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway">
+            <argument type="service" id="eecom_blog_draft.repository"/>
+            <argument type="service" id="eecom_blog_activity.repository"/>
+            <argument type="service" id="eecom_blog.repository"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Internal\CommonService">
+            <argument type="service" id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlService">
+            <argument id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry" type="service"/>
+            <argument id="EECom\EEComBlog\VersionControlSystem\Internal\VersionFromVersionUpdater" type="service"/>
+        </service>
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Internal\VersionFromVersionUpdater">
+            <argument id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter" type="service"/>
+            <argument id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry" type="service"/>
+            <argument id="version.repository" type="service"/>
+            <argument id="version_commit.repository" type="service"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\VersionControlSystem\Internal\ActivityLogSubscriber">
+            <argument id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry" type="service"/>
+            <argument id="EECom\EEComBlog\VersionControlSystem\Internal\VersionControlBlogGateway" type="service"/>
+            <argument id="eecom_blog.repository" type="service"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+
+        <service
+            class="EECom\EEComBlog\Common\PreDeletedRepositoryDecorator"
+            id="EECom\EEComBlog\VersionControlSystem\Internal\EntityRepositoryDecorator.cms_page"
+            decoration-inner-name="eecom_blog.inner"
+            decorates="eecom_blog.repository"
+        >
+            <argument type="service" id="eecom_blog.inner"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\Common\UpdateChangeDetector">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="collection">
+                <argument type="string">EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition</argument>
+                <argument type="string">
+                    EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogTranslation\EEComBlogTranslationDefinition
+                </argument>
+            </argument>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Elasticsearch\EEComBlog\ElasticsearchEEComBlogDefinition">
+            <argument type="service" id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition"/>
+            <argument type="service" id="Shopware\Elasticsearch\Framework\Indexing\EntityMapper"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+
+            <tag name="shopware.es.definition"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Elasticsearch\EEComBlog\EEComBlogSearchBuilder"
+                 decorates="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchBuilderInterface"
+                 decoration-priority="-50000">
+
+            <argument type="service" id="EECom\EEComBlog\Elasticsearch\EEComBlog\EEComBlogSearchBuilder.inner"/>
+            <argument type="service" id="Shopware\Elasticsearch\Framework\ElasticsearchHelper"/>
+            <argument type="service" id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchBuilderInterface"
+                 class="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchBuilder">
+            <argument type="service"
+                      id="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchTermInterpreter"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchTermInterpreter">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Search\Term\Tokenizer"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Search\Term\Filter\TokenFilter"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\Elasticsearch\EEComBlog\EEComBlogUpdater">
+            <argument type="service" id="Shopware\Elasticsearch\Framework\Indexing\ElasticsearchIndexer"/>
+            <argument type="service" id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataAbstractionLayer\EEComBlogIndexer">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Dbal\Common\IteratorFactory"/>
+            <argument type="service" id="eecom_blog.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Indexing\InheritanceUpdater"/>
+            <argument type="service" id="Shopware\Core\Content\Product\DataAbstractionLayer\SearchKeywordUpdater"/>
+            <argument type="service"
+                      id="Shopware\Core\Framework\DataAbstractionLayer\Indexing\ManyToManyIdFieldUpdater"/>
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="shopware.entity_indexer" priority="100"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\Suggest\EEComBlogSuggestRoute" public="true">
+            <argument type="service"
+                      id="EECom\EEComBlog\Core\Content\EEComBlog\SearchKeyword\EEComBlogSearchBuilderInterface"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service"
+                      id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\Listing\EEComBlogListingLoader"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\Listing\EEComBlogListingLoader">
+            <argument type="service" id="sales_channel.product.repository"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Storefront\Page\Suggest\SuggestPageLoader">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service"
+                      id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\Suggest\EEComBlogSuggestRoute"/>
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataResolver\EEComBlogListingCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="eecom_blog_category.repository"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataResolver\EEComBlogSingleSelectDataResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataResolver\EEComBlogTeaserBoxCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataResolver\EEComBlogNavigationCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\SalesChannelEEComBlogDefinition">
+            <tag name="shopware.sales_channel.entity.definition"/>
+        </service>
+        <service id="EECom\EEComBlog\Storefront\Page\EEComBlog\EEComBlogPageLoader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="eecom_blog.repository"/>
+            <argument id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader" type="service"/>
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
+            <argument type="service"
+                      id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\SalesChannelEEComBlogDefinition"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\DataResolver\EEComBlogHeadingCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+
+        <service id="EECom\EEComBlog\Core\Content\EEComBlog\SalesChannel\Detail\BlogDetailRoute" public="true">
+            <argument type="service" id="eecom_blog.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader"/>
+            <argument type="service" id="EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+        <service id="EECom\EEComBlog\Core\Content\EEComBlogCategory\SalesChannel\EEComBlogCategoryRoute" public="true">
+            <argument type="service" id="eecom_blog_category.repository"/>
+            <argument type="service" id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader"/>
+            <argument type="service" id="EECom\EEComBlog\Core\Content\EEComBlogCategory\EEComBlogCategoryDefinition"/>
+
+        </service>
+    </services>
+</container>

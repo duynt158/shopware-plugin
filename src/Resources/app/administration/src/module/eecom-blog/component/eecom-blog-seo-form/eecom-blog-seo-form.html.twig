@@ -1,0 +1,30 @@
+{% block sw_category_seo_form %}
+    <div class="sw-category-seo-form">
+        {% block sw_category_seo_form_meta_title %}
+            <sw-field
+                v-model="blog.metaTitle"
+                type="text"
+                :label="$tc('sw-category.base.seo.labelMetaTitle')"
+                :placeholder="$tc('sw-category.base.seo.placeholderMetaTitle')"
+            />
+        {% endblock %}
+
+        {% block sw_category_seo_form_meta_description %}
+            <sw-field
+                v-model="blog.metaDescription"
+                type="textarea"
+                :label="$tc('sw-category.base.seo.labelMetaDescription')"
+                :placeholder="$tc('sw-category.base.seo.placeholderMetaDescription')"
+            />
+        {% endblock %}
+
+        {% block sw_category_seo_form_keywords %}
+            <sw-field
+                v-model="blog.keywords"
+                type="text"
+                :label="$tc('sw-category.base.seo.labelKeywords')"
+                :placeholder="$tc('sw-category.base.seo.placeholderKeywords')"
+            />
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+@import "~scss/variables";
+
+.sw-cms-preview-blog-category-navigation {
+    width: 100%;
+    background: $color-white;
+    font-size: 22px;
+    color: $color-darkgray-200;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 20px 20px;
+
+    .sw-cms-block-category-placeholder-listing div {
+        margin: 10px 0;
+        height: 0.7em;
+        border-radius: 4px;
+        background-color: $color-gray-100;
+
+        &.sw-cms-block-category-navigation__placeholder--subcategory {
+            margin: 7px 0 7px 30px;
+        }
+    }
+    .sw-cms-block-category-placeholder-listing div.sw-cms-block-category-navigation__label
+    {
+        height: auto;
+        background: none;
+        text-align: center;
+        span{
+            background-color: $color-gray-100;
+            width: 97px;
+            display: block;
+            border-radius: 7px;
+            text-align: center;
+            margin: auto;
+        }
+    }
+
+    hr {
+        max-width: 90%;
+        margin: 10px auto;
+        border: 1px solid $color-gray-300;
+    }
+}

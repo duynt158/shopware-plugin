@@ -1,0 +1,160 @@
+{% block eecom_blog_category_form %}
+<div class="eecom-blog-category-form">
+    <sw-container class="eecom-blog-category-form__description">
+        {% block eecom_blog_category_form_visibility_title %}
+            <span class="eecom-blog-category-form__visibility-title">
+            {{ $tc('eecom-blog.visibility.labelVisibility') }}
+        </span>
+        {% endblock %}
+
+        {% block eecom_blog_category_form_visibility_body %}
+            <p class="eecom-blog-category-form__visibility-body">
+                {{ $tc('eecom-blog.visibility.bodyVisibility') }}
+            </p>
+        {% endblock %}
+
+        {% block eecom_blog_category_form_visibility_field %}
+            <sw-inherit-wrapper
+
+                ref="blogVisibilitiesInheritance"
+                v-model="blog.visibilities"
+                class="eecom-blog-category-form__visibility_field"
+                :inherited-value="null"
+                :label="$tc('eecom-blog.visibility.labelVisibility')"
+                :custom-remove-inheritance-function="visibilitiesRemoveInheritanceFunction"
+                is-association
+            >
+                <template #content="{ currentValue, isInherited, updateCurrentValue }">
+                    <eecom-blog-visibility-select
+                        v-if="!isLoading"
+                        ref="blogVisibility"
+                        :key="isInherited"
+                        class="eecom-blog-detail__select-visibility"
+                        :entity-collection="currentValue"
+                        :placeholder="$tc('eecom-blog.visibility.placeholderVisibility')"
+                        @change="updateCurrentValue"
+                    />
+                </template>
+            </sw-inherit-wrapper>
+        {% endblock %}
+    </sw-container>
+
+    {% block eecom_blog_category_form_visibility_field_link %}
+        <sw-container
+            columns="repeat(auto-fit, minmax(250px, 1fr))"
+            align="center"
+        >
+            {% block eecom_blog_category_form_active_field %}
+
+                        <sw-switch-field
+                            v-model="blog.active"
+                            class="sw-field--blog-active no-margin"
+                            :label="$tc('eecom-blog.settingsForm.labelActive')"></sw-switch-field>
+
+            {% endblock %}
+            <a
+                v-if="hasSelectedVisibilities"
+                class="sw-card__quick-link advanced-visibility"
+                style="text-align: right; display: block"
+                @click="displayAdvancedVisibility"
+            >
+                {{ $tc('eecom-blog.visibility.linkAdvancedVisibility') }} <sw-icon
+                    name="default-arrow-simple-right"
+                    small></sw-icon>
+            </a>
+            <sw-modal
+                v-if="displayVisibilityDetail"
+                :title="$tc('eecom-blog.visibility.textHeadline')"
+                class="eecom-blog-category-form__visibility_modal"
+                @modal-close="closeAdvancedVisibility"
+            >
+                <p>{{ $tc('eecom-blog.visibility.visibilityModalDescription') }}</p>
+
+                <eecom-blog-visibility-detail></eecom-blog-visibility-detail>
+
+                <template slot="modal-footer">
+                    <sw-button
+                        variant="primary"
+                        size="small"
+                        @click="closeAdvancedVisibility"
+                    >
+                        {{ $tc('eecom-blog.visibility.closeModal') }}
+                    </sw-button>
+                </template>
+            </sw-modal>
+        </sw-container>
+    {% endblock %}
+    {% block eecom_blog_category_form_category_field %}
+        <sw-container
+            rows="2em 4em 4em"
+            class="eecom-blog-feature-set-form__description"
+        >
+            {% block sw_product_category_form_categories_title %}
+                <span class="eecom-blog-category-form__visibility-title">
+            {{ $tc('eecom-blog.categoryForm.categoriesTitle') }}
+        </span>
+            {% endblock %}
+
+            {% block sw_product_category_form_categories_body %}
+                <p class="eecom-blog-category-form__categories-body">
+                    {{ $tc('eecom-blog.categoryForm.descriptionCategories') }}
+                </p>
+                <p class="eecom-blog-category-form__categories-body">
+                    {{ $tc('eecom-blog.categoryForm.descriptionTags') }}
+                </p>
+            {% endblock %}
+            <sw-entity-multi-select  v-if="!loading" v-model="blog.categories"
+                                    entityName="eecom_blog_category"
+                                    :label="$t('eecom-blog.detail.categoryDetail')"
+                                     :placeholder="$tc('eecom-blog.categoryForm.placeholderCategory')"
+            ></sw-entity-multi-select>
+
+
+        </sw-container>
+    {% endblock %}
+    {% block eecom_blog_category_form_tags_field %}
+        <sw-inherit-wrapper
+            v-model="blog.tags"
+            class="eecom-blog-category-form__tag-field-wrapper"
+            :inherited-value="null"
+            is-association
+            :help-text="$tc('eecom-blog.categoryForm.helpTextTags')"
+            :label="$tc('global.sw-tag-field.title')"
+        >
+
+            <template #content="{ currentValue, isInherited, updateCurrentValue }">
+                <sw-entity-tag-select
+                    v-if="!isLoading"
+                    class="eecom-blog-category-form__tag-field"
+                    :placeholder="$tc('eecom-blog.categoryForm.placeholderTags')"
+                    :entity-collection="currentValue ? currentValue : {}"
+                    @change="updateCurrentValue"></sw-entity-tag-select>
+            </template>
+        </sw-inherit-wrapper>
+    {% endblock %}
+    {% block eecom_blog_category_form_search_keyword_field %}
+        <sw-inherit-wrapper
+            v-model="blog.customSearchKeywords"
+            :help-text="$tc('eecom-blog.categoryForm.helpTextSearchKeyword')"
+            :inherited-value="null"
+            :label="$tc('eecom-blog.categoryForm.labelSearchKeyword')"
+        >
+            <template #content="{ currentValue, isInherited, updateCurrentValue }">
+                <sw-multi-tag-select
+                    class="eecom-blog-category-form__search-keyword-field"
+                    :value="currentValue ? currentValue : []"
+                    :placeholder="$tc('eecom-blog.categoryForm.placeholderSearchKeywords')"
+                    @change="updateCurrentValue"
+                >
+                    <template #message-add-data>
+                        <span>{{ $tc('eecom-blog.categoryForm.textAddSearchKeyword') }}</span>
+                    </template>
+                    <template #message-enter-valid-data>
+                        <span>{{ $tc('eecom-blog.categoryForm.textEnterValidSearchKeyword') }}</span>
+                    </template>
+                </sw-multi-tag-select>
+            </template>
+        </sw-inherit-wrapper>
+    {% endblock %}
+</div>
+{% endblock %}

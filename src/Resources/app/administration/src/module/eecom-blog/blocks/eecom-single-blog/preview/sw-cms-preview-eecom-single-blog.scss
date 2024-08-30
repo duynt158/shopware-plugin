@@ -1,0 +1,23 @@
+@import "~scss/variables";
+
+.sw-cms-preview-eecom-single-blog {
+    width: 100%;
+    background: $color-white;
+    font-size: 22px;
+    color: $color-darkgray-200;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 20px;
+
+    .sw-cms-preview-image-text-gallery__image
+    {
+        a{
+            top: 94%;
+        }
+    }
+    .sw-cms-preview-image-text-gallery__text
+    {
+        text-align: center;
+        margin-top: 20px;
+    }
+}

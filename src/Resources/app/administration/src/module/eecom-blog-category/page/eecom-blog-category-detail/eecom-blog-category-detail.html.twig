@@ -1,0 +1,138 @@
+{% block eecom_blog_category_detail %}
+    <sw-page class="eecom-blog-category-detail">
+        {% block eecom_blog_category_detail_header %}
+            <template #smart-bar-header>
+                <h2>{{ CategoryTitle }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block eecom_blog_category_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button :routerLink="{ name: 'eecom.blog.category.index' }">
+                    {{ $t('eecom-blog-category.detail.cancelButtonText') }}
+                </sw-button>
+
+                <sw-button-group
+                    class="swag-customized-products-detail__save-button-group"
+                    :splitButton="true"
+                   >
+
+                    {% block eecom_blog_category_detail_smart_bar_actions_save %}
+                        <sw-button-process
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            variant="primary"
+                            @process-finish="saveFinish"
+                            @click="onClickSave">
+                            {{ $t('eecom-blog-category.detail.saveButtonText') }}
+                        </sw-button-process>
+                    {% endblock %}
+
+                    {% block eecom_blog_category_detail_smart_bar_actions_save_context_menu %}
+                        <sw-context-button v-if="categoryId">
+                            <template #button>
+                                <sw-button
+                                    class="swag-customized-products-detail__context-menu-save-action"
+                                    square
+                                    variant="primary"
+                                    :disabled="!categoryId">
+                                    <sw-icon name="small-arrow-medium-down" size="16"></sw-icon>
+                                </sw-button>
+                            </template>
+
+                            {% block eecom_blog_category_detail_actions_save_context_menu_actions %}
+
+                                {% block seecom_blog_category_detail_actions_duplicate %}
+                                    <sw-context-menu-item
+                                        class="swag-customized-products-detail__context-menu-duplicate-action"
+                                        :disabled="!categoryId"
+                                        @click="onDuplicateSave">
+                                        {{ $t('eecom-blog-category.detail.duplicateButtonText') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                            {% endblock %}
+                        </sw-context-button>
+                    {% endblock %}
+                </sw-button-group>
+
+
+
+            </template>
+        {% endblock %}
+
+        {% block sw_product_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    @on-change="onChangeLanguage"
+                    :saveChangesFunction="saveOnLanguageChange"
+                    :abortChangeFunction="abortOnLanguageChange"
+                    :disabled="!categoryId">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block eecom_blog_category_detail_content %}
+            <template #content>
+                <sw-card-view>
+
+                    {% block eecom_blog_category_detail_content_language_info %}
+                        <sw-language-info
+                            :entityDescription="placeholder(category, 'name', $tc('eecom-blog-category.detail.textHeadline'))"
+                            :isNewEntity="!categoryId">
+                        </sw-language-info>
+                    {% endblock %}
+
+                    {% block eecom_blog_category_detail_content_tabs %}
+                        <sw-tabs v-if="categoryId" class="eecom-blog-category-detail-page__tabs">
+                            {% block eecom_blog_category_detail_content_tabs_category_data %}
+                                <sw-tabs-item
+                                    class="eecom-blog-category-detail__tab-category-data"
+                                    :route="{ name: 'eecom.blog.category.detail.categoryData', params: { id: $route.params.id } }"
+                                    :title="$tc('eecom-blog-category.detail.tabCategoryData')"
+                                    >
+                                    {{ $tc('eecom-blog-category.detail.tabBlogCategoryData') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+                            {% block eecom_blog_category_detail_content_tabs_category_seo %}
+                                <sw-tabs-item
+                                    class="eecom-club-detail__tab-blog-category-seo"
+                                    :route="{ name: 'eecom.blog.category.detail.categorySeo', params: { id: $route.params.id } }"
+                                    :title="$tc('eecom-blog-category.detail.tabSeo')">
+                                    {{ $tc('eecom-blog-category.detail.tabSeo') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+
+                        </sw-tabs>
+                    {% endblock %}
+
+                    {% block eecom_blog_category_detail_content_view %}
+                        <router-view></router-view>
+                    {% endblock %}
+
+
+                    {% block eecom_blog_category_detail_content_clone_modal %}
+                        <eecom-blog-category-clone-modal
+                            v-if="cloning"
+                            :category="category"
+                            @clone-finish="onDuplicateFinish"
+                        />
+                    {% endblock %}
+                </sw-card-view>
+            </template>
+        {% endblock %}
+
+        <template #sidebar>
+            {% block eecom_blog_category_detail_sidebar %}
+                <sw-sidebar :propagateWidth="true">
+                    <sw-sidebar-media-item ref="mediaSidebarItem">
+                        <template #context-menu-items="media">
+                            <sw-context-menu-item @click="onAddItemToTeam(media.mediaItem)">
+                                {{ $tc('eecom-blog-category.detail.labelContextMenuAddToTeam') }}
+                            </sw-context-menu-item>
+                        </template>
+                    </sw-sidebar-media-item>
+                </sw-sidebar>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

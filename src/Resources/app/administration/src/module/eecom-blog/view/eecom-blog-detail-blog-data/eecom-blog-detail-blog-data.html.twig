@@ -1,0 +1,103 @@
+{% block eecom_blog_detail_team_data %}
+    <div class="eecom-blog-detail-blog-data">
+
+        {% block eecom_blog_detail_blog_data_basic_info_card %}
+            <sw-card :title="$tc('eecom-blog.detailBlogData.cardDataTitle')" :isLoading="isLoading">
+                {% block eecom_blog_detail_blog_data_basic_info_form %}
+                    <div class="eecom-blog-data-basic-info">
+                        <sw-container columns="1fr" gap="0px 30px">
+                            {% block eecom_blog_data_info_name_field %}
+                                <sw-field
+                                    v-if="!isLoading"
+                                    type="text"
+                                    v-model="blog.name"
+
+                                    :required="isTitleRequired"
+                                    :label="$t('eecom-blog.detail.nameLabel')"
+                                    :placeholder="placeholder(blog, 'name', $t('eecom-blog.detail.namePlaceholder'))"
+                                    :error="blogNameError">
+                                </sw-field>
+                            {% endblock %}
+
+                        </sw-container>
+                        <sw-container columns="1fr 1fr" gap="0px 30px">
+                            {% block eecom_blog_data_info_author_field %}
+                                <sw-entity-single-select
+                                    v-if="!isLoading"
+                                    v-model="blog.authorId"
+                                    :label="$tc('eecom-blog.detail.authorLabel')"
+                                    labelProperty="username"
+                                    :placeholder="$tc('eecom-blog.detail.authorPlaceholder')"
+                                    entity="user">
+                                </sw-entity-single-select>
+                            {% endblock %}
+                            {% block eecom_blog_info_release_date_field %}
+                                <sw-field
+                                    type="date"
+                                    date-type="datetime-local"
+                                    v-if="!isLoading"
+                                    v-model="blog.publishedAt"
+                                    :label="$t('eecom-blog.detail.publishDateLabel')">
+                                </sw-field>
+                            {% endblock %}
+                        </sw-container>
+                    </div>
+                {% endblock %}
+
+            </sw-card>
+        {% endblock %}
+
+        {% block eecom_blog_detail_blog_data_blog_teaser_card %}
+            <sw-card :title="$tc('eecom-blog.detailBlogData.teaserInformationTitle')" :isLoading="isLoading">
+                <div class="eecom-blog-data-blog-teaser-info">
+                {% block eecom_blog_data_info_blog_teaser_field %}
+                    <sw-upload-listener
+                        v-if="!isLoading"
+                        :uploadTag="uploadTag"
+                        autoUpload
+                        @media-upload-finish="setMediaItem">
+                    </sw-upload-listener>
+                    <sw-media-upload-v2
+                        v-if="!isLoading"
+                        :uploadTag="uploadTag"
+                        :source="blog.media"
+                        :targetFolderId="mediaDefaultFolderId"
+                        variant="regular"
+                        :label="$tc('eecom-blog.detail.teaserLabel')"
+                        :allowMultiSelect="false"
+                        class="eecom-blog-detail__blog-teaser-image-upload"
+                        @media-drop="onDropMedia"
+                        @media-upload-sidebar-open="onMediaUploadButtonOpenSidebar"
+                        @media-upload-remove-image="onUnlinkImage"
+                    >
+                    </sw-media-upload-v2>
+                {% endblock %}
+
+                {% block eecom_blog_data_info_blog_teaser_description_field %}
+                    <sw-text-editor
+                        v-model="blog.description"
+                        :label="$tc('eecom-blog.detail.labelDescription')"
+                        :placeholder="$tc('eecom-blog.detail.placeholderDescription')">
+                    </sw-text-editor>
+                {% endblock %}
+                </div>
+            </sw-card>
+        {% endblock %}
+
+        {% block eecom_blog_detail_base_category_card %}
+            <sw-card
+                class="eecom-blog-detail-base__visibility-structure"
+                :title="$tc('eecom-blog.detail.cardTitleAssignment')"
+                v-if="!isLoading"
+            >
+
+                {% block eecom_blog_detail_base_category_form %}
+                    <eecom-blog-category-form > </eecom-blog-category-form>
+                {% endblock %}
+
+            </sw-card>
+        {% endblock %}
+
+
+    </div>
+{% endblock %}

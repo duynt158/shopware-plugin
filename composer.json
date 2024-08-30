@@ -1,0 +1,29 @@
+{
+  "name": "eecom/blog",
+  "description": "EECom blog description here",
+  "version": "v1.0.11",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+        "name": "11ts ecom GmbH"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EECom\\EEComBlog\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "EECom\\EEComBlog\\EEComBlog",
+    "plugin-icon": "11ts-icon.png",
+      "label": {
+          "de-DE": "EECom Blog",
+          "en-GB": "EECom Blog"
+      },
+      "description": {
+          "de-DE": "EECom Blog - Blog list category wise and assign different layout in blog detail page",
+          "en-GB": "EECom Blog - Blog list category wise and assign different layout in blog detail page"
+      }
+  }
+}

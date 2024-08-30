@@ -1,0 +1,17 @@
+{% block component_eecom_box_include %}
+
+    {% if layout is empty %}
+        {% set layout = 'standard' %}
+    {% endif %}
+
+    {% if layout == 'standard' %}
+        {% sw_include "@Storefront/storefront/component/eecom-blog/card/box-standard.html.twig" %}
+    {% elseif layout == 'image' %}
+        {% sw_include "@Storefront/storefront/component/eecom-blog/card/box-image.html.twig" %}
+    {% elseif layout == 'minimal' %}
+        {% sw_include "@Storefront/storefront/component/eecom-blog/card/box-minimal.html.twig" %}
+    {% else %}
+        {% set template = "@Storefront/storefront/component/eecom-blog/card/box-" ~ layout ~ ".html.twig" %}
+        {% sw_include template ignore missing %}
+    {% endif %}
+{% endblock %}

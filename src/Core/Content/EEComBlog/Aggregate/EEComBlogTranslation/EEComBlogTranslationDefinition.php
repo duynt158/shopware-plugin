@@ -1,0 +1,65 @@
+<?php declare(strict_types=1);
+
+namespace EECom\EEComBlog\Core\Content\EEComBlog\Aggregate\EEComBlogTranslation;
+
+use EECom\EEComBlog\Core\Content\EEComBlog\EEComBlogDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityTranslationDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\CustomFields;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\AllowHtml;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\JsonField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\ListField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
+use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+
+class EEComBlogTranslationDefinition extends EntityTranslationDefinition
+{
+    public const ENTITY_NAME = 'eecom_blog_translation';
+
+    public function getEntityName(): string
+    {
+        return self::ENTITY_NAME;
+    }
+
+
+    public function isVersionAware(): bool
+    {
+        return true;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return EEComBlogTranslationCollection::class;
+    }
+
+    public function getEntityClass(): string
+    {
+        return EEComBlogTranslationEntity::class;
+    }
+
+    public function since(): ?string
+    {
+        return '6.0.0.0';
+    }
+
+    protected function getParentDefinitionClass(): string
+    {
+        return EEComBlogDefinition::class;
+    }
+
+    protected function defineFields(): FieldCollection
+    {
+        return new FieldCollection([
+            (new StringField('meta_description', 'metaDescription'))->addFlags(new ApiAware()),
+            (new StringField('name', 'name'))->addFlags(new ApiAware(), new Required()),
+            (new LongTextField('keywords', 'keywords'))->addFlags(new ApiAware()),
+            (new LongTextField('description', 'description'))->addFlags(new ApiAware(), new AllowHtml()),
+            (new StringField('meta_title', 'metaTitle'))->addFlags(new ApiAware()),
+            new ListField('custom_search_keywords', 'customSearchKeywords'),
+            (new JsonField('slot_config', 'slotConfig'))->addFlags(new ApiAware()),
+            (new CustomFields())->addFlags(new ApiAware()),
+        ]);
+    }
+}

@@ -1,0 +1,44 @@
+{% block element_eecom_blog_name %}
+    {% set config = element.fieldConfig.elements %}
+
+    <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
+        {% block element_eecom_blog_name_alignment %}
+            {% block element_eecom_blog_back_button %}
+                {% if controllerName|lower === 'eecomblog' %}
+
+                    {% set goBack = app.request.headers.get('referer')|split("?") %}
+
+                    <a href="{{ goBack[0] }}"
+                       class="btn btn-primary eecom-blog-back-button">{{ "eecom-blog.element.blog-heading.back-button"|trans }}</a>
+                {% endif %}
+            {% endblock %}
+            {% if config.verticalAlign.value %}
+                <div class="cms-element-alignment{% if config.verticalAlign.value == "center" %} align-self-center{% elseif config.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+            {% endif %}
+            {% block element_eecom_blog_name_inner %}
+                {% if config.content.isStatic %}
+                    <span itemprop="name">
+                        {{ element.data.content|raw }}
+                    </span>
+                {% else %}
+                    <h1 class="eecom-blog-detail-name" itemprop="name">
+                        {{ element.data.content|raw }}
+                    </h1>
+                    {% block element_eecom_blog_author_published_info %}
+                        {% if controllerName|lower === 'eecomblog' %}
+                            {% set blogInfo = page.EecomBlog.publishedAt and page.EecomBlog.authorId ? page.EecomBlog.publishedAt|format_date(locale=app.request.locale) ~ ' - ' ~ page.EecomBlog.user.firstName ~ ' ' ~ page.EecomBlog.user.lastName : page.EecomBlog.publishedAt ? page.EecomBlog.publishedAt|format_date(locale=app.request.locale)  : page.EecomBlog.authorId ?  page.EecomBlog.user.firstName ~ ' ' ~ page.EecomBlog.user.lastName  : '' %}
+                            {% if blogInfo %}
+                                <p>
+                                    {{ blogInfo }}
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    {% endblock %}
+                {% endif %}
+            {% endblock %}
+            {% if config.verticalAlign.value %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

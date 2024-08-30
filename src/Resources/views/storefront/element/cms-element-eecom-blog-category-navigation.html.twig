@@ -1,0 +1,15 @@
+<div class="cms-element-{{ element.type }}">
+    <div class="category-navigation-box" id="filter-panel-wrapper"
+         data-offcanvas-filter-content="true"
+         class="filter-panel-wrapper"
+    >
+        {% if element.data.total > 0 %}
+
+            {% sw_include '@Storefront/storefront/component/eecom-blog-category/category-navigation.html.twig' with {
+                navigationTree: element.data,
+                config:element.config,
+                page: page
+            } only %}
+        {% endif %}
+    </div>
+</div>

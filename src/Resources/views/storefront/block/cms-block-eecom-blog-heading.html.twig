@@ -1,0 +1,15 @@
+{% block block_eecom_blog_heading %}
+    {% set eecomBlogNameElement = block.slots.getSlot('left') %}
+
+    {% block block_eecom_blog_heading_eecom_blog_name_element %}
+        <div class="col product-heading-name-container" data-cms-element-id="{{ eecomBlogNameElement.id }}">
+            {% block block_product_heading_eecom_blog_name_inner %}
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ eecomBlogNameElement.type ~ ".html.twig" ignore missing with {
+                    element: eecomBlogNameElement
+                } %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+
+{% endblock %}

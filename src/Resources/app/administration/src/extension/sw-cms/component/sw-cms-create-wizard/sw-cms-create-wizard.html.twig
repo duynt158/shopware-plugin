@@ -1,0 +1,14 @@
+{% block sw_cms_create_wizard_page_type_options_product_detail %}
+ {% parent() %}
+
+    <div
+        class="sw-cms-create-wizard__page-type"
+        @click="onPageTypeSelect('blog_page')"
+    >
+        <sw-icon
+            name="default-communication-speech-bubble"
+            size="24"
+        />
+        <p>{{ $tc('eecom-blog.page-type.type') }}</p>
+    </div>
+{% endblock %}

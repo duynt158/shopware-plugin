@@ -1,0 +1,16 @@
+{% block sas_cms_element_blog_single_select %}
+
+    <div class="sw-cms-el-blog-single-select">
+        <div class="sw-cms-preview-eecom-single-blog">
+            <div class="sw-cms-preview-image-text-gallery__image">
+                <img :src="blogImage" />
+                <a> Read More</a>
+            </div>
+            <div class="sw-cms-preview-image-text-gallery__text">
+                <h2>{{ title }}</h2>
+                <p v-html="description"></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

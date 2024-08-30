@@ -1,0 +1,122 @@
+{
+    "publisher": {
+        "listing": {
+            "draft": "Draft",
+            "drafts": "{1} 1 Draft | {count} Drafts",
+            "draftPageType": "Drafts",
+            "modal": {
+                "title": "Drafts of",
+                "close": "Cancel",
+                "whitespace": "No drafts found.",
+                "placeholderSearch": "Search for a draft..."
+            },
+            "gridName": "Name",
+            "gridAuthor": "Created by",
+            "gridCreatedAt": "Creation date"
+        },
+        "detail": {
+            "preview": "Preview",
+            "previewTooltip": "Only saved contents will be displayed",
+            "sidebar": {
+                "activity": {
+                    "title": "Activity",
+                    "whitespace": "The activities of you and your colleagues on this blog are listed here."
+                }
+            },
+            "action": {
+                "save": "Save",
+                "saveDraft": "Save as new draft",
+                "saveAssign": "Save and publish"
+            },
+            "modal": {
+                "titleUnsaved": "Unsaved changes",
+                "discard": "Discard changes",
+                "saveAsDraft": "Save as new draft",
+                "save": "Save",
+                "unsavedLineInformation": "Your changes will be lost if you don't save them.",
+                "unsavedLineConfirmation": "Save changes made to the blog?",
+                "titleSaveDraft": "Save new Draft",
+                "saveDraftInformation": "Name your design according to the changes you have made to the blog, so that you can easily find it again later.",
+                "saveDraftLabelName": "Name",
+                "saveDraftConfirmation": "Save draft",
+                "cancel": "Cancel",
+                "titlePublish": "Publish changes",
+                "publishAffectedCategories": "{1} blog changes will affect 1 active category. | blog changes will affect {count} active categories.",
+                "publishInformation": "Saved changes will be applied to your live shop and are visible to customers.",
+                "publishConfirmation": "Do you want to save and publish your changes?",
+                "saveAndPublish": "Save & publish changes",
+                "titleParentChanges": "Changes in main blog",
+                "infoParentChanges": "While you were working on this draft, the main blog has been changed.",
+                "descriptionParentChanges": "You can continue using this draft or create a new independent blog. If you update your draft with the main blog, changes made to this draft will be lost.",
+                "buttonUpdateFromParent": "Update from main blog",
+                "buttonCreateNewLayout": "Create new blog",
+                "buttonSaveAsNewDraft": "Ignore update"
+            }
+        },
+        "activity": {
+            "dates": {
+                "editedNow": "Edited just now",
+                "editedMinutesAgo": "{1} 1 minute ago | {minutes} minutes ago",
+                "editedHoursAgo": "{1} 1 hour ago | {hours} hours ago",
+                "editedDaysAgo": "{1} 1 day ago | {days} days ago"
+            },
+            "feed": {
+                "title": "Activity",
+                "whitespace": "All changes made on this blog will be listed here.",
+                "showDetails": "Show changes",
+                "hideDetails": "Hide changes",
+                "badges": {
+                    "eecom_blog": {
+                        "discarded": "Draft discarded",
+                        "merged": "Main blog published",
+                        "published": "Draft published",
+                        "layoutEdited": "blog edited",
+                        "draftCreated": "Draft created",
+                        "layoutCreated": "blog created",
+                        "updated": "{1} 1 change made | {detailCount} changes made"
+                    }
+                },
+                "badgeMessages": {
+                    "eecom_blog": {
+                        "discarded": "Draft <b>{draftName}</b> discarded",
+                        "merged": "Pushed draft <b>{draftName}</b> to main blog"
+                    }
+                },
+                "detail": {
+                    "eecom_blog": {
+                        "update": "Updated blog",
+                        "insert": "Created blog"
+                    }
+
+                }
+            }
+        },
+        "error": {
+            "title": "An error occurred.",
+            "action": {
+                "draft": "The draft could not be created.",
+                "saveAndPublish": "The draft could not be published.",
+                "getDrafts": "The drafts could not be loaded.",
+                "duplicateDraft": "The draft could not be duplicated.",
+                "merge": "The draft could not be overridden.",
+                "createNewLayout": "The new blog could not be created.",
+                "getSalesChannelUrl": "No sales channel URL could be found.",
+                "saveCmsPage": "The blog could not be updated.",
+                "updateFromParent": "The draft could not be updated by the main blog."
+            }
+        }
+    },
+    "sw-privileges": {
+        "permissions": {
+            "publisher": {
+                "label": "Publisher"
+            }
+        }
+    },
+    "eecom-blog": {
+        "page-type": {
+            "type": "Blog Page",
+            "block-category": "Blog"
+        }
+    }
+}

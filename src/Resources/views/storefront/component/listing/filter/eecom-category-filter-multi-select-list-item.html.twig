@@ -1,0 +1,26 @@
+{% block component_filter_multi_select_list_item %}
+
+    {% set id = element.id %}
+
+
+    {% block component_filter_multi_select_list_item_checkbox_input %}
+        <input type="radio"
+               name="{{ name }}"
+               class="filter-multi-select-checkbox d-none"
+               data-label="{{ element.translated.name }}"
+               value="{{ id }}"
+          
+               id="{{ id }}">
+    {% endblock %}
+
+    {% block component_filter_multi_select_list_item_label_element %}
+        <a style="color: {{ config.textColor.value }}" href="{{ seoUrl('frontend.eecom.blog.category.detail.page', { 'id':id}) }}">
+            <span class="eecom-blog-category-navigation-link filter-rating-select-item-label" for="{{ id }}">
+                {% block component_multi_select_list_item_label %}
+                    {{ element.translated.name }}
+                {% endblock %}
+            </span>
+        </a>
+    {% endblock %}
+
+{% endblock %}

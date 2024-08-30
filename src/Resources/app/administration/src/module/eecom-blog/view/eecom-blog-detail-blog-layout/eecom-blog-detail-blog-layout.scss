@@ -1,0 +1,38 @@
+@import "~scss/variables";
+
+.eecom-blog-detail-layout {
+    &__no-config.sw-card {
+        text-align: center;
+        font-size: $font-size-small;
+    }
+
+    &__content-info {
+        color: $color-gray-500;
+        font-size: $font-size-small;
+    }
+}
+.eecom-blog-layout-assignment {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 32px;
+}
+.eecom-blog-layout-assignment__figure {width: 250px;}
+.eecom-blog-layout-assignment__heading.is--disabled * {
+    color: #b3bfcc;
+}
+.eecom-blog-layout-assignment__title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #b3bfcc;
+}
+.eecom-blog-layout-assignment__subtitle
+{
+    font-weight: 400;
+    font-size: 14px;
+    color: #b3bfcc;
+}
+.eecom-blog-layout-assignment__heading
+{
+    margin: 0 0 16px;
+    font-size: 14px;
+}

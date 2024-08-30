@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/component/eecom-blog/card/box-standard.html.twig' %}
+
+{% block component_eecom_blog_box_description %}{% endblock %}
+{% block component_eecom_box_button %} {% endblock %}
+
+{% block component_eecom_blog_box_name %}
+    {{ parent() }}
+    {% block eecom_blog_card_title_date %}
+        <p class="eecom-blog-date">
+
+            <small>{{ blog.publishedAt|format_date(locale=app.request.locale) }}</small>
+        </p>
+    {% endblock %}
+
+{% endblock %}

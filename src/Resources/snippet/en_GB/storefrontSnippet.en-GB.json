@@ -1,0 +1,39 @@
+{
+    "eecom-blog": {
+        "category": {
+            "default-label": "Overview"
+        },
+        "detail": {
+            "meta": {
+                "author": "Author",
+                "category": "Categories"
+            }
+        },
+        "element": {
+            "detail": {
+                "warning": {
+                    "heading": "Error while loading the detail page",
+                    "content": "There seems to be an issue while loading the blog detail page. Maybe you have the Blog detail CMS element within the same page as the Blog listing CMS element?"
+                }
+            },
+            "singleSelect": {
+                "emptyResult": "No blog entry was chosen"
+            },
+            "blog-heading": {
+                "back-button": "Back"
+            }
+        },
+        "box": {
+            "author": {
+                "countEntries": "Entries"
+            }
+        },
+        "listing": {
+            "readMoreLabel": "read more",
+            "emptyResultMessage": "No blogs found.",
+            "filterPanelResetAll": "Reset",
+            "filterBlogCategoriesDisplayName": "Categories",
+            "filterBlogAuthorDisplayName": "Author"
+        }
+    }
+}

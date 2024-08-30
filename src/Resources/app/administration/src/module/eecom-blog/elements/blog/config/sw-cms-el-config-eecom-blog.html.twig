@@ -1,0 +1,38 @@
+{% block eecom_blog_cms_element_blog_listing_config %}
+    <div class="sw-cms-el-config-blog">
+
+        {% block eecom_blog_element_blog_listing_config_paginationCount_field %}
+            <sw-number-field
+                numberType="int"
+                :step="1"
+                :min="1"
+                :max="null"
+                v-model="element.config.paginationCount.value"
+                :digits="2"
+                :allowEmpty="false"
+                :label="$tc('eecom-blog.elements.listing.config.paginationCount')">
+            </sw-number-field>
+        {% endblock %}
+
+        {% block eecom_blog_element_blog_listing_config_show_type %}
+            <sw-select-field :label="$tc('eecom-blog.elements.listing.config.showType.label')"
+                             v-model="element.config.showType.value">
+                {% block eecom_blog_cms_element_product_listing_config_layout_select_options %}
+                    <option value="standard">
+                        {{ $tc('eecom-blog.elements.listing.config.label.layoutTypeStandard') }}
+                    </option>
+                    <option value="image">
+                        {{ $tc('eecom-blog.elements.listing.config.label.layoutTypeImage') }}
+                    </option>
+                    <option value="minimal">
+                        {{ $tc('eecom-blog.elements.listing.config.label.layoutTypeMinimal') }}
+                    </option>
+                {% endblock %}
+            </sw-select-field>
+        {% endblock %}
+
+
+
+
+    </div>
+{% endblock %}

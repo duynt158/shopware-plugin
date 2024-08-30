@@ -1,0 +1,93 @@
+{% block sw_cms_element_eecom_blog_box %}
+    <div
+        v-if="blog"
+        class="sw-cms-el-eecom-blog-box sw-cms-el-product-box"
+        :class="`box-${element.config.boxLayout.value}`"
+    >
+
+        {% block sw_cms_element_eecom_blog_box_content %}
+            <div
+                class="sw-cms-el-product-box__content"
+                :style="verticalAlignStyle"
+            >
+
+
+
+                {% block sw_cms_element_eecom_blog_box_media %}
+                    <div class="sw-cms-el-product-box__media">
+                        <a
+                            href="#"
+                            :title="placeholder(blog, 'name')"
+                            class="sw-cms-el-product-box__image-link"
+                        >
+                            <img
+                                class="sw-cms-el-product-box__image"
+                                :class="displayModeClass"
+                                :src="mediaUrl"
+                                :alt="altTag"
+                            >
+                            <a class="read-more"> Read More</a>
+                        </a>
+                    </div>
+                {% endblock %}
+
+                {% block sw_cms_element_eecom_blog_box_info_skeleton %}
+                    <div
+                        v-if="displaySkeleton"
+                        class="sw-cms-el-product-box__info"
+                    >
+
+                        {% block sw_cms_element_eecom_blog_box_name_skeleton %}
+                            <div class="sw-cms-el-product-box__skeleton-name"></div>
+                        {% endblock %}
+
+                        {% block sw_cms_element_eecom_blog_box_description_skeleton %}
+                            <div class="sw-cms-el-product-box__skeleton-description"></div>
+                            <div class="sw-cms-el-product-box__skeleton-description"></div>
+                            <div class="sw-cms-el-product-box__skeleton-description"></div>
+                        {% endblock %}
+
+
+
+
+
+                    </div>
+                {% endblock %}
+
+                {% block sw_cms_element_eecom_blog_box_info %}
+                    <div
+                        v-else
+                        class="sw-cms-el-product-box__info"
+                    >
+
+                        {% block sw_cms_element_eecom_blog_box_name %}
+                            <a
+                                href="#"
+
+                                class="sw-cms-el-product-box__name"
+                                :title="placeholder(blog, 'name')"
+                            >
+                                {{ placeholder(blog, 'name', blog.name) }}
+
+                            </a>
+                        {% endblock %}
+
+                        {% block sw_cms_element_eecom_blog_box_description %}
+                            <div
+                                v-if="element.config.boxLayout.value === 'standard'"
+                                class="sw-cms-el-product-box__description"
+                            >
+                                {{ placeholder(blog, 'description', blog.description) | truncate(200, true, '...') }}
+                            </div>
+                        {% endblock %}
+
+
+
+                    </div>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% block component_eecom_blog_box_action_inner %}
+    {% set id = blog.id %}
+    <div class="eecom-blog-action">
+        {% block component_eecom_blog_box_action_detail %}
+            <a href="{{ seoUrl('frontend.eecom.blog.detail.page', {'id': id}) }}"
+               class="btn btn-block btn-secondary"
+               title="{{ "eecom-blog.listing.readMoreLabel"|trans|striptags }}">
+                {{ "eecom-blog.listing.readMoreLabel"|trans|sw_sanitize }}
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}

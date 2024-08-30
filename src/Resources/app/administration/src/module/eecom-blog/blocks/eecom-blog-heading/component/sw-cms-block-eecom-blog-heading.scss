@@ -1,0 +1,8 @@
+.sw-cms-block-eecom-blog-heading {
+    display: grid;
+    grid-column-gap: 20px;
+
+    &.is--mobile {
+        grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+    }
+}

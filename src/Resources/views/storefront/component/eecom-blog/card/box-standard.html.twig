@@ -1,0 +1,84 @@
+{% block component_eecom_blog_box %}
+    {% if blog %}
+        {% set name = blog.translated.name %}
+        {% set id = blog.id %}
+        {% set cover = blog.media %}
+
+        <div class="card product-box eecom-blog-box box-{{ layout }}">
+            {% block component_eecom_blog_box_content %}
+                <div class="card-body">
+                    {% block component_eecom_blog_box_image %}
+
+
+                        <div class="product-image-wrapper">
+                            {# fallback if display mode is not set #}
+                            {% set displayMode = displayMode ?: 'standard' %}
+
+                            {# set display mode 'cover' for box-image with standard display mode #}
+                            {% if layout == 'image' and displayMode == 'standard' %}
+                                {% set displayMode = 'cover' %}
+                            {% endif %}
+
+                            <a href="{{ seoUrl('frontend.eecom.blog.detail.page', {'id': id}) }}"
+                               title="{{ name }}"
+                               class="product-image-link is-cover">
+                                {% if cover.url %}
+                                    {% set attributes = {
+                                        'class': 'product-image is-'~displayMode,
+                                        'alt': (cover.translated.alt ?: name),
+                                        'title': (cover.translated.title ?: name)
+                                    } %}
+
+                                    {% if displayMode == 'cover' or displayMode == 'contain' %}
+                                        {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                                    {% endif %}
+
+                                    {% sw_thumbnails 'product-image-thumbnails' with {
+                                        media: cover,
+                                        sizes: {
+                                            'xs': '601px',
+                                            'sm': '315px',
+                                            'md': '427px',
+                                            'lg': '333px',
+                                            'xl': '284px'
+                                        }
+                                    } %}
+                                {% else %}
+                                    <div class="product-image-placeholder">
+                                        {% sw_icon 'placeholder' style {
+                                            'size': 'fluid'
+                                        } %}
+                                    </div>
+                                {% endif %}
+                            </a>
+                            {% block component_eecom_box_button %}
+                                {% sw_include '@Storefront/storefront/component/eecom-blog/card/eecom-blog-action.html.twig' %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block component_eecom_blog_box_info %}
+                        <div class="eecom-blog-info">
+
+                            {% block component_eecom_blog_box_name %}
+                                <a href="{{ seoUrl('frontend.eecom.blog.detail.page', {'id': id}) }}"
+                                   class="eecom-blog-name"
+                                   title="{{ name }}">
+                                    {{ name }}
+                                </a>
+                            {% endblock %}
+
+                            {% block component_eecom_blog_box_description %}
+                                <div class="eecom-blog-description">
+                                    {{ blog.translated.description|striptags|raw }}
+                                </div>
+                            {% endblock %}
+
+
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

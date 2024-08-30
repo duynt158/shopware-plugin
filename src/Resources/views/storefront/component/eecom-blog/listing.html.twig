@@ -1,0 +1,68 @@
+{% set currentPage = ((searchResult.criteria.offset + 1) / searchResult.criteria.limit )|round(0, 'ceil') %}
+{% set paginationConfig = { page: currentPage }|json_encode %}
+
+{% set listingPagination = {
+    params: params,
+    dataUrl: dataUrl,
+    filterUrl: filterUrl,
+    snippets: {
+        resetAllButtonText: 'eecom-blog.listing.filterPanelResetAll'|trans|sw_sanitize
+    }
+} %}
+
+{% block sas_blog_listing %}
+
+    <div class="cms-element-product-listing-wrapper"
+         data-listing-pagination="true"
+         data-listing-pagination-options='{{ paginationConfig }}'
+         data-listing="true"
+         data-listing-options='{{ listingPagination|json_encode }}'>
+
+        <div class="cms-element-product-listing">
+
+
+            {% block eecom_element_blog_listing_row %}
+                <div class="cms-listing-row cms-eecom-listing-row row js-listing-wrapper">
+                    {% if searchResult.total > 0 %}
+                        {% block eecom_element_blog_listing_col %}
+                            {% for blog in searchResult %}
+                                {% block eecom_element_blog_listing_box %}
+                                    <div class="cms-listing-col {{ listingColumns }}">
+                                        {% sw_include '@Storefront/storefront/component/eecom-blog/card/box.html.twig' with {
+                                            'layout': boxLayout
+                                        } %}
+                                    </div>
+                                {% endblock %}
+                            {% endfor %}
+                        {% endblock %}
+                    {% else %}
+                        {% block eecom_element_blog_listing_col_empty %}
+                            <div class="cms-listing-col col-12">
+                                {% block eecom_element_blog_listing_col_empty_alert %}
+                                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                        type: 'info',
+                                        content: 'eecom-blog.listing.emptyResultMessage'|trans|sw_sanitize
+                                    } %}
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+
+            {% if searchResult.total > 0 %}
+                <div class="cms-element-eecom-blog-listing-actions row justify-content-center">
+                    {% block sas_block_pagination %}
+
+                            {% sw_include '@Storefront/storefront/component/pagination.html.twig' with {
+                                entities: searchResult,
+                                criteria: searchResult.criteria
+                            } %}
+
+                    {% endblock %}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

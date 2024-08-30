@@ -1,0 +1,46 @@
+{% block eecom_blog_category_detail_team_data %}
+    <div class="eecom-blog-category-detail-team-data">
+
+        {% block eecom_blog_category_detail_category_data_basic_info_card %}
+            <sw-card :title="$tc('eecom-blog-category.detailCategoryData.cardDataTitle')" :isLoading="isLoading">
+                {% block eecom_blog_category_detail_category_data_basic_info_form %}
+                <div class="eecom-blog-category-data-basic-info">
+                    <sw-container columns="1fr 1fr 1fr" gap="0px 30px">
+                        {% block eecom_blog_category_data_info_name_field %}
+                            <sw-field
+                                v-if="!isLoading"
+                                type="text"
+                                v-model="category.name"
+                                :required="isTitleRequired"
+                                :label="$t('eecom-blog-category.detail.nameLabel')"
+                                :placeholder="placeholder(category, 'name', $t('eecom-blog-category.detail.namePlaceholder'))"
+                                :error="categoryNameError">
+                            </sw-field>
+                        {% endblock %}
+                        {% block eecom_blog_category_info_active_field %}
+                            <sw-field
+                                v-if="!isLoading"
+                                type="switch"
+                                v-model="category.active"
+                                :label="$t('eecom-blog-category.detail.activeLabel')">
+                            </sw-field>
+                        {% endblock %}
+                        {% block eecom_blog_category_info_order_field %}
+                            <sw-field
+                                v-if="!isLoading"
+                                v-model="category.position"
+                                type="number"
+                                class="sw-settings-payment-detail__field-position"
+                                :label="$tc('eecom-blog-category.detail.orderLabel')"
+                                :placeholder="$tc('eecom-blog-category.detail.orderLabel')"
+                            />
+                        {% endblock %}
+                    </sw-container>
+                </div>
+                {% endblock %}
+
+            </sw-card>
+        {% endblock %}
+
+    </div>
+{% endblock %}

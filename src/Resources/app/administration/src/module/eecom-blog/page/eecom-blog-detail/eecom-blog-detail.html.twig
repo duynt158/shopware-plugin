@@ -1,0 +1,246 @@
+{% block eecom_blog_detail %}
+    <sw-page class="eecom-blog-detail">
+        {% block eecom_blog_detail_header %}
+            <template #smart-bar-header>
+                <h2>{{ blogTitle }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block eecom_blog_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button :routerLink="{ name: 'eecom.blog.index' }">
+                    {{ $t('eecom-blog.detail.cancelButtonText') }}
+                </sw-button>
+
+
+                <sw-button-group
+                    class="swag-customized-products-detail__save-button-group"
+                    :splitButton="true"
+                >
+
+                    {% block eecom_blog_detail_smart_bar_actions_save %}
+                        <sw-button-process
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            variant="primary"
+                            @process-finish="saveFinish"
+                            @click="onClickSave">
+                            {{ $t('eecom-blog.detail.saveButtonText') }}
+                        </sw-button-process>
+                    {% endblock %}
+
+                    {% block eecom_blog_detail_smart_bar_actions_save_context_menu %}
+                        <sw-context-button v-if="blogId">
+                            <template #button>
+                                <sw-button
+                                    class="swag-customized-products-detail__context-menu-save-action"
+                                    square
+                                    variant="primary"
+                                    :disabled="!blogId">
+                                    <sw-icon name="small-arrow-medium-down" size="16"></sw-icon>
+                                </sw-button>
+                            </template>
+
+                            {% block eecom_blog_detail_actions_save_context_menu_actions %}
+                                {% block seecom_blog_category_detail_actions_draft %}
+                                    <sw-context-menu-item
+                                        class="swag-customized-products-detail__context-menu-duplicate-action"
+                                        :disabled="!blogId || isEntityDraft"
+                                        @click="onSaveDraft">
+                                        {{ $t('eecom-blog.detail.draftButtonText') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                                {% block eecom_blog_category_detail_actions_duplicate %}
+                                    <sw-context-menu-item
+                                        class="swag-customized-products-detail__context-menu-duplicate-action"
+                                        :disabled="!blogId"
+                                        @click="onDuplicateSave">
+                                        {{ $t('eecom-blog.detail.duplicateButtonText') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                                {% block eecom_blog_category_detail_toolbar_actions_context_save_assign %}
+                                    <sw-context-menu-item
+                                        :disabled="!isEntityDraft"
+                                        class="sw-product-detail__save-duplicate-action"
+                                        @click="onSavePublish"
+                                    >
+                                        {{ $tc('publisher.detail.action.saveAssign') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                            {% endblock %}
+                        </sw-context-button>
+                    {% endblock %}
+                </sw-button-group>
+
+
+
+
+            </template>
+        {% endblock %}
+
+        {% block eecom_blog_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    @on-change="onChangeLanguage"
+                    :saveChangesFunction="saveOnLanguageChange"
+                    :abortChangeFunction="abortOnLanguageChange"
+                    :disabled="!blogId">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block eecom_blog_detail_content %}
+            <template #content>
+                <sw-card-view>
+
+                    {% block eecom_blog_detail_content_language_info %}
+                        <sw-language-info
+                            :entityDescription="placeholder(blog, 'name', $tc('eecom-blog.detail.textHeadline'))"
+                            :isNewEntity="!blogId">
+                        </sw-language-info>
+                    {% endblock %}
+
+                    {% block eecom_blog_detail_content_tabs %}
+                        <sw-tabs v-if="blogId" class="eecom-blog-detail-page__tabs">
+                            {% block eecom_blog_detail_content_tabs_blog_data %}
+                                <sw-tabs-item
+                                    class="eecom-blog-detail__tab-blog-data"
+                                    :route="{ name: 'eecom.blog.detail.blogData', params: { id: $route.params.id } }"
+                                    :title="$tc('eecom-blog.detail.tabBlogData')"
+                                    >
+                                    {{ $tc('eecom-blog.detail.tabBlogData') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+                            {% block eecom_blog_detail_content_tabs_blog_layout %}
+                                <sw-tabs-item
+                                    class="eecom-blog-detail__tab-blog-layout"
+                                    :route="{ name: 'eecom.blog.detail.blogLayout', params: { id: $route.params.id } }"
+                                    :title="$tc('eecom-blog.detail.tabBlogLayout')"
+                                >
+                                    {{ $tc('eecom-blog.detail.tabBlogLayout') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+                            {% block eecom_blog_detail_content_tabs_blog_seo %}
+                                <sw-tabs-item
+                                    class="eecom-blog-detail__tab-blog-seo"
+                                    :route="{ name: 'eecom.blog.detail.blogSeo', params: { id: $route.params.id } }"
+                                    :title="$tc('eecom-blog.detail.tabBlogSeo')"
+                                >
+                                    {{ $tc('eecom-blog.detail.tabBlogSeo') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+
+
+                        </sw-tabs>
+                    {% endblock %}
+
+                    {% block eecom_blog_detail_content_view %}
+                        <router-view></router-view>
+                    {% endblock %}
+
+                    {% block eecom_blog_detail_content_clone_modal %}
+                        <eecom-blog-clone-modal
+                            v-if="cloning"
+                            :blog="blog"
+                            @clone-finish="onDuplicateFinish"
+                        />
+                    {% endblock %}
+
+
+                    {% block publisher_eecom_blog_detail_modals_draft_name %}
+                        <sw-modal
+                            v-if="showModalDraftName"
+                            :title="$tc('eecom-blog.detail.modal.titleSaveDraft')"
+                            @modal-close="showModalDraftName = false"
+                            class="publisher__modal"
+                            variant="small"
+                        >
+                            <template>
+                                <p>{{ $tc('eecom-blog.detail.modal.saveDraftInformation') }}</p>
+
+                                <sw-text-field
+                                    :value="draftName"
+                                    :label="$tc('publisher.detail.modal.saveDraftLabelName')"
+                                    @input="setDraftName"
+                                    class="publisher__modal-input--draft-name"
+                                ></sw-text-field>
+                            </template>
+
+                            <template #modal-footer>
+                                <sw-button
+                                    @click="showModalDraftName = false"
+                                    class="left"
+                                >
+                                    {{ $tc('eecom-blog.detail.modal.cancel') }}
+                                </sw-button>
+                                <sw-button
+                                    @click="onModalDraftNameConfirm"
+                                    variant="primary"
+                                >
+                                    {{ $tc('eecom-blog.detail.modal.saveDraftConfirmation') }}
+                                </sw-button>
+                            </template>
+                        </sw-modal>
+                    {% endblock %}
+                    {% block publisher_blog_detail_modals_save_and_publish %}
+                        <sw-modal
+                            v-if="showModalPublish"
+                            :title="$tc('publisher.detail.modal.titlePublish')"
+                            @modal-close="showModalPublish = false"
+                            class="publisher__modal"
+                            size="600px"
+                        >
+                            <template>
+                                <div class="publisher__modal-info">
+                                    <sw-icon
+                                        name="default-badge-info"
+                                        size="18"
+                                    ></sw-icon>
+                                    {{ $tc('publisher.detail.modal.publishAffectedCategories', blog.categories.length) }}
+                                </div>
+                                <p>{{ $tc('publisher.detail.modal.publishInformation') }}</p>
+                                <br>
+                                <p><b>{{ $tc('publisher.detail.modal.publishConfirmation') }}</b></p>
+                            </template>
+
+                            <template #modal-footer>
+                                <sw-button
+                                    @click="onDiscard"
+                                    class="left"
+                                >
+                                    {{ $tc('publisher.detail.modal.discard') }}
+                                </sw-button>
+                                <sw-button
+                                    @click="onModalSaveDraft"
+                                    variant="ghost"
+                                    :disabled="isEntityDraft"
+                                >
+                                    {{ $tc('publisher.detail.modal.saveAsDraft') }}
+                                </sw-button>
+                                <sw-button
+                                    @click="onModalSavePublish"
+                                    variant="primary"
+                                    :disabled="!isEntityDraft"
+                                >
+                                    {{ $tc('publisher.detail.modal.saveAndPublish') }}
+                                </sw-button>
+                            </template>
+                        </sw-modal>
+                    {% endblock %}
+
+                </sw-card-view>
+            </template>
+        {% endblock %}
+
+        <template #sidebar>
+            {% block eecom_blog_detail_sidebar %}
+                <sw-sidebar :propagateWidth="true">
+                    <sw-sidebar-media-item ref="mediaSidebarItem">
+                    </sw-sidebar-media-item>
+                    <eecom-blog-publisher-activity-feed></eecom-blog-publisher-activity-feed>
+                </sw-sidebar>
+            {% endblock %}
+
+        </template>
+    </sw-page>
+{% endblock %}

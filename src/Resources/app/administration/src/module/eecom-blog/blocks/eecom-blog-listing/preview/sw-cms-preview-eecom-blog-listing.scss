@@ -1,0 +1,16 @@
+@import "~scss/variables";
+
+ .sw-cms-preview-image-text-gallery__image{
+            position: relative;
+     a{
+         position: absolute;
+         top: 80%;
+         background: $color-black;
+         display: block;
+         text-align: center;
+         width: 78%;
+         left: 13%;
+         font-size: 12px;
+         color: $color-white;
+     }
+}

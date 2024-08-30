@@ -1,0 +1,20 @@
+{% block component_filter_panel_items_container %}
+
+
+    {% block component_filter_panel_item_category %}
+
+        {% set blogCategories = navigationTree %}
+        {% if not blogCategories.entities is empty %}
+
+            {% sw_include '@Storefront/storefront/component/listing/filter/category-filter-select.html.twig' with {
+                elements: blogCategories,
+                sidebar: sidebar,
+                name: 'eecomBlogCategories',
+                displayName: 'sas-blog.listing.filterBlogCategoriesDisplayName'|trans|sw_sanitize
+            } %}
+
+        {% endif %}
+    {% endblock %}
+
+
+{% endblock %}

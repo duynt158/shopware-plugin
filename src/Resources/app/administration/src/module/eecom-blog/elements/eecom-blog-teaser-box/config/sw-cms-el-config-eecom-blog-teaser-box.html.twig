@@ -1,0 +1,63 @@
+{% block sw_cms_element_eecom_blog_teaser_box_config %}
+    <div class="sw-cms-el-config-product-slider">
+        {% block sw_cms_element_eecom_blog_teaser_box_config_tabs %}
+
+
+
+                    {% block sw_cms_element_eecom_blog_teaser_box_config_content %}
+                        <sw-container
+                            class="sw-cms-el-config-product-slider__tab-content"
+                        >
+                            {% block sw_cms_element_eecom_blog_teaser_box_config_content_title %}
+                                <sw-field
+                                    v-model="element.config.title.value"
+                                    type="text"
+                                    :label="$tc('eecom-blog.elements.teaserBox.config.label.title')"
+                                    :placeholder="$tc('eecom-blog.elements.teaserBox.config.label.title')"
+                                />
+                            {% endblock %}
+
+                            {% block sw_cms_element_eecom_blog_teaser_box_config_content_blog_assignment_type %}
+                                <sw-single-select
+                                    v-model="element.config.blogs.source"
+                                    class="sw-cms-el-config-product-slider__product-assignment-type-select"
+                                    :label="$tc('eecom-blog.elements.teaserBox.config.label.blogAssignmentType')"
+                                    :options="eecomBlogAssignmentTypes"
+                                    @change="onChangeAssignmentType"
+                                >
+                                </sw-single-select>
+                            {% endblock %}
+
+                            <template v-if="element.config.blogs.source === 'mapped'">
+                                <sw-number-field
+                                    v-model="element.config.blogLimit.value"
+                                    :label="$tc('eecom-blog.elements.teaserBox.config.label.blogLimit')"
+                                    class="sw-cms-el-config-product-slider__product-stream-limit"
+                                    :min="1"
+                                >
+                                </sw-number-field>
+                            </template>
+
+                            {% block sw_cms_element_eecom_blog_teaser_box_config_content_blogs %}
+                                <sw-entity-multi-select
+                                    v-else
+                                    v-model="blogCollection"
+                                    class="sw-cms-el-config-product-slider__products"
+                                    :label="$tc('eecom-blog.elements.teaserBox.config.label.selection')"
+                                    :placeholder="$tc('eecom-blog.elements.teaserBox.config.placeholder.selection')"
+                                    :context="blogMultiSelectContext"
+                                    :criteria="blogMediaFilter"
+                                    @change="onBlogsChange"
+                                >
+
+                                </sw-entity-multi-select>
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
+
+
+
+
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% block eecom_blog_category_detail_seo %}
+    <div class="eecom-blog-category-detail-seo">
+
+        {% block eecom_blog_category_detail_seo_config %}
+            <sw-card
+                :title="$tc('sw-category.base.seo.title')"
+                :is-loading="isLoading"
+            >
+                <eecom-blog-category-seo-form :category="category" />
+            </sw-card>
+        {% endblock %}
+
+        {% block eecom_blog_category_detail_seo_list %}
+
+            <sw-seo-url
+                v-if="category.seoUrls"
+                :is-loading="isLoading"
+                :has-default-template="false"
+                :urls="category.seoUrls"
+            />
+        {% endblock %}
+
+    </div>
+{% endblock %}

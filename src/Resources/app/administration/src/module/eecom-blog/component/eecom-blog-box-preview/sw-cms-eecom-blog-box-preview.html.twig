@@ -1,0 +1,24 @@
+{% block sw_cms_eecom_blog_box_preview %}
+    <div
+        class="sw-cms-product-box-preview"
+        :class="{ 'has--text': hasText }"
+    >
+
+        <div class="sw-cms-product-box-preview__image">
+            <img :src="'/administration/static/img/cms/preview_glasses_small.jpg' | asset">
+        </div>
+
+        <div v-if="hasText">
+            <div class="sw-cms-product-box-preview__name">
+                Lorem Ipsum
+            </div>
+
+            <div class="sw-cms-product-box-preview__description">
+                Lorem ipsum dolor sit amet conset...
+            </div>
+
+
+        </div>
+
+        </div>
+{% endblock %}

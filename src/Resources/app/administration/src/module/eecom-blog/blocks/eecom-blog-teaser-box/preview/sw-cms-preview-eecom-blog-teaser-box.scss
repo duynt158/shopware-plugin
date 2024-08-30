@@ -1,0 +1,51 @@
+@import "~scss/variables";
+.sw-cms-preview-eecom-blog-teaser-box
+{
+    .sw-cms-preview-product-slider__product-box
+    {
+        .sw-cms-preview-image-text-gallery__left
+        {
+            .sw-cms-preview-image-text-gallery__image
+            {
+                position:relative;
+                a{
+                    position: absolute;
+                    top: 84%;
+                    background: $color-black;
+                    display: block;
+                    text-align: center;
+                    width: 78%;
+                    left: 13%;
+                    font-size: 12px;
+                    color: $color-white;
+                }
+            }
+            .sw-cms-preview-image-text-gallery__text
+            {
+                text-align: center;
+            }
+        }
+        .sw-cms-preview-image-text-gallery__center
+        {
+            .sw-cms-preview-image-text-gallery__image
+            {
+                position:relative;
+                a{
+                    position: absolute;
+                    top: 84%;
+                    background: $color-black;
+                    display: block;
+                    text-align: center;
+                    width: 78%;
+                    left: 13%;
+                    font-size: 12px;
+                    color: $color-white;
+                }
+            }
+            .sw-cms-preview-image-text-gallery__text
+            {
+                text-align: center;
+            }
+        }
+    }
+}

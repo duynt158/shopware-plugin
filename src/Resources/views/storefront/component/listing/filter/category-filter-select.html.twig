@@ -1,0 +1,101 @@
+{% set filterItemId = 'filter-' ~ name ~ '-' ~ random() %}
+
+{% if pluginSelector is not defined %}
+    {% set pluginSelector = 'filter-multi-select' %}
+{% endif %}
+
+{% if dataPluginSelectorOptions is not defined %}
+    {% set dataPluginSelectorOptions = {
+        name: name,
+        snippets: {
+            disabledFilterText: 'listing.disabledFilterTooltip'|trans|sw_sanitize
+        }
+    } %}
+{% endif %}
+{% block layout_navigation_eecom_blog_categories_navigation_style %}
+    <style>
+        .eecom-blog-category-navigation-entry:hover {
+            background: linear-gradient({{ config.hoverPrimaryColor.value }}, {{ config.hoverColorGradiant.value }});
+        }
+
+        .eecom-blog-category-navigation-entry a:hover, .eecom-blog-category-navigation-entry a {
+            text-transform: none;
+            text-decoration: none;
+        }
+
+        li.is--active {
+            background: linear-gradient({{ config.hoverPrimaryColor.value }}, {{ config.hoverColorGradiant.value }});
+        }
+    </style>
+{% endblock %}
+{% block component_filter_multi_select %}
+
+    <div
+        class="filter-multi-select filter-multi-select-{{ name }}"
+        data-{{ pluginSelector }}="true"
+        data-{{ pluginSelector }}-options='{{ dataPluginSelectorOptions|json_encode }}'>
+
+        {% block component_filter_multi_select_toggle %}
+            {% block component_filter_multi_select_count %}
+                <span class="filter-multi-select-count d-none"></span>
+            {% endblock %}
+        {% endblock %}
+        {% set isSelectedCategory = app.request.get('eecomBlogCategories') %}
+
+        {% set logoUrl = config.logoUrl.value %}
+        {% block component_filter_multi_select_dropdown %}
+            <div class=""
+                 id="{{ filterItemId }}">
+                {% block component_filter_multi_select_list %}
+                    <ul class="eecom-blog-category-navigation"
+                        style="background:linear-gradient({{ config.bgPrimaryColor.value }}, {{ config.bgColorGradiant.value }})"
+                        data-eecom-blog-navigation="true"
+                        data-eecom-blog-navigation-options="{{ hoverColorOption | json_encode }}"
+                    >
+                        {% set verticalAlign = config.verticalAlign.value ?: 'center' %}
+                        <li class="eecom-blog-category-navigation-logo" style="align-items: {{ verticalAlign }} ">
+                            {% block layout_navigation_eecom_blog_logo %}
+                            {% set eecomNavigationLogo = searchMedia([config.media.value], context.context).first %}
+
+
+
+                            {% if logoUrl %} <a href="{{ logoUrl }}"> {% endif %}<img
+                                    src="{{ eecomNavigationLogo.url }}"
+                                    style="height: {{ config.elMinLogoHeight.value }}"
+                                    alt="{{ eecomNavigationLogo.alt }}"/>{% if logoUrl %}</a>{% endif %} </li>
+                        {% endblock %}
+                        </li>
+                        <li class="eecom-blog-category-navigation-entry
+                        {% if isSelectedCategory === null %} is--active {% endif %}"
+                            style="color: {{ config.textColor.value }}"
+                        >
+                            <a href="{{ seoUrl('frontend.navigation.page', { 'navigationId': page.navigationId}) }}"
+                               style="color: {{ config.textColor.value }}">
+
+                                <label class="eecom-blog-category-navigation-link filter-rating-select-item-label">
+                                    {{ "eecom-blog.category.default-label"|trans }}
+
+                                </label>
+                            </a>
+
+                        </li>
+                        {% for element in elements %}
+                            {% block component_filter_multi_cleaselect_list_item %}
+                                <li class="eecom-blog-category-navigation-entry
+
+                                {% if isSelectedCategory == element.id %} is--active {% endif %}"
+                                    data-eecom-blog-category-item style="color: {{ config.textColor.value }}">
+                                    {% block component_filter_multi_select_list_item_inner %}
+                                        {% sw_include '@Storefront/storefront/component/listing/filter/eecom-category-filter-multi-select-list-item.html.twig' %}
+                                    {% endblock %}
+                                </li>
+                            {% endblock %}
+
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+
+{% endblock %}

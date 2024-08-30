@@ -1,0 +1,33 @@
+{% block eecom_element_blog_listing %}
+
+    {# @var result \Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult #}
+
+    {% set searchResult = element.data %}
+    {% set config = element.fieldConfig.elements %}
+    {% set listingColumns = 'col-sm-6 col-lg-4 col-xl-3' %}
+    {% set slot = page.cmsPage.firstElementOfType('blog') %}
+
+    {% set filterUrl = null %}
+    {% set dataUrl = null %}
+
+    {% if page.header.navigation.active.id %}
+        {% set filterUrl = url('frontend.cms.navigation.filter', { navigationId: page.header.navigation.active.id }) %}
+        {% set dataUrl = url('frontend.cms.navigation.page', { navigationId: page.header.navigation.active.id }) %}
+    {% endif %}
+
+
+    {% set params = { slots: slot.id, 'no-aggregations': 1 } %}
+
+    {% block eecom_element_blog_listing_wrapper %}
+
+        {% sw_include '@Storefront/storefront/component/eecom-blog/listing.html.twig' with {
+            searchResult: searchResult,
+            dataUrl: dataUrl,
+            filterUrl: filterUrl,
+            params: params,
+            config: config,
+            boxLayout: element.translated.config.showType.value
+        } %}
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+@import "~scss/variables";
+
+.sw-cms-el-blog-single-select
+{
+    width: 100%;
+    .sw-cms-preview-eecom-single-blog
+    {
+        .sw-cms-preview-image-text-gallery__image
+        {
+            text-align: center;
+            a {
+                font-size: 20px;
+            }
+            img{
+                width: 100%;
+            }
+        }
+    }
+}

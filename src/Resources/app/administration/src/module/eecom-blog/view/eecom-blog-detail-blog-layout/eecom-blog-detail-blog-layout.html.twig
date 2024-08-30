@@ -1,0 +1,58 @@
+{% block eecom_blog_detail_layout %}
+    <div class="sw-product-detail-layout">
+        {% block eecom_blog_detail_layout_assignment %}
+            <sw-card
+                :is-loading="isLoading"
+                :title="$tc('eecom-blog.layout.title')"
+                :subtitle="$tc('eecom-blog.layout.subtitle')"
+            >
+
+                {% block eecom_blog_detail_layout_content %}
+                    <eecom-blog-layout-assignment
+                        :cms-page="currentPage"
+                        @modal-layout-open="onOpenLayoutModal"
+                        @button-edit-click="onOpenInPageBuilder"
+                        @button-delete-click="onResetLayout"
+                    />
+                {% endblock %}
+
+                {% block eecom_blog_detail_layout_modal %}
+                    <sw-cms-layout-modal
+                        v-if="showLayoutModal"
+                        :headline="$tc('eecom-blog.layoutAssignment.subtitle')"
+                        :cms-page-types="['blog_page']"
+                        @modal-layout-select="onSelectLayout"
+                        @modal-close="onCloseLayoutModal"
+                    />
+                {% endblock %}
+            </sw-card>
+        {% endblock %}
+
+        {% block eecom_blog_detail_layout_cms_config %}
+            <template v-if="currentPage">
+                {% block eecom_blog_detail_layout_cms_config_form %}
+                    <sw-cms-page-form
+                        v-if="showCmsForm"
+                        :page="currentPage"
+                    />
+
+                    <sw-card
+                        v-else
+                        class="sw-product-detail-layout__no-config"
+                        :is-loading="isConfigLoading"
+                    >
+                        <p>{{ $tc('eecom-blog.layout.textNoConfig') }}</p>
+                    </sw-card>
+                {% endblock %}
+
+                {% block eecom_blog_detail_layout_cms_content_info %}
+                    <sw-card hero>
+                        <p class="sw-product-detail-layout__content-info">
+                            {{ $tc('eecom-blog.layout.textContentInfo') }}
+                        </p>
+                    </sw-card>
+                {% endblock %}
+            </template>
+        {% endblock %}
+    </div>
+{% endblock %}

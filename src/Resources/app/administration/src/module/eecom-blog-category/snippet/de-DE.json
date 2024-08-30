@@ -1,0 +1,45 @@
+{
+    "eecom-blog-category": {
+        "general": {
+            "mainMenuItemNavigation": "Blog",
+            "mainMenuItemGeneral": "Blog Posts",
+            "mainMenuCategoryItemGeneral": "Blog Subdivisions",
+            "descriptionTextModule": "Manage Blog Subdivisions here"
+        },
+        "list": {
+            "textTitle": "Blog Subdivisions",
+            "addButtonText": "Add Subdivision",
+            "publishedAt": "Release Date",
+            "columnName": "Blog Subdivision name",
+            "categoryName": "Assigned Subdivisions",
+            "columnActive": "Active",
+            "columnOrder": "Position",
+            "emptyList": "No Blog Subdivisions yet",
+            "titleSidebarItemRefresh": "Refresh"
+        },
+        "detail": {
+            "textHeadline": "New Blog Subdivision",
+            "cancelButtonText": "Cancel",
+            "saveButtonText": "Save",
+            "duplicateButtonText": "Save and duplicate",
+            "saveAsDraftButtonText": "Save as draft",
+            "tabCategoryData": "Blog Subdivision Data",
+            "tabSeo": "SEO",
+            "nameLabel": "Blog Subdivision name",
+            "namePlaceholder": "Enter Subdivision name",
+            "activeLabel": "Active",
+            "orderLabel": "Position",
+            "tabBlogCategoryData": "General"
+        },
+        "detailCategoryData": {
+            "cardDataTitle": "General",
+            "cardInformationTitle": "Blog Subdivision Information",
+            "cardPhotoTitle": "Blog Subdivision Photos"
+        }
+    },
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-eecom-blog-category-detail-page": "EECom Blog Category Page"
+        }
+    }
+}

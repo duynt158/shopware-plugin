@@ -1,0 +1,270 @@
+{
+    "eecom-blog": {
+        "general": {
+            "mainMenuItemNavigation": "Blog",
+            "mainMenuItemGeneral": "Blog Posts",
+            "mainMenuCategoryItemGeneral": "Blog Subdivisions",
+            "descriptionTextModule": "Manage Blog here"
+        },
+        "list": {
+            "textTitle": "Blog Posts",
+            "addButtonText": "Add Blog",
+            "publishedAt": "Release Date",
+            "columnName": "Blog post name",
+            "categoryName": "Assigned Subdivisions",
+            "columnActive": "Active",
+            "emptyList": "No Blogs yet",
+            "titleSidebarItemRefresh": "Refresh"
+        },
+        "detail": {
+            "textHeadline": "New blog",
+            "cancelButtonText": "Cancel",
+            "saveButtonText": "Save",
+            "errorTitle": "Error",
+            "errorMessage": "Please fill in all required fields.",
+            "tabBlogData": "General",
+            "tabBlogLayout": "Layout",
+            "tabBlogSeo": "SEO",
+            "namePlaceholder": "Blog name",
+            "nameLabel": "Blog Page name",
+            "activeLabel": "Active",
+            "authorLabel": "Author",
+            "publishDateLabel": "Release date",
+            "authorPlaceholder": "Select or enter author name...",
+            "labelDescription": "Teaser Text",
+            "placeholderDescription": "Enter Teaser Text here",
+            "teaserLabel": "Teaser Image",
+            "cardTitleAssignment": "Assignment",
+            "categoryDetail": "Subdivisions",
+            "duplicateButtonText": "Save and duplicate",
+            "draftButtonText": "Save as draft",
+            "modal": {
+                "titleSaveDraft": "Save new Draft",
+                "saveDraftInformation": "Name your data according to the changes you have made to the blog, so that you can easily find it again later.",
+                "cancel": "cancel",
+                "saveDraftConfirmation": "Save draft"
+            }
+        },
+        "visibility": {
+            "labelVisibility": "Visibility",
+            "placeholderVisibility" : "Select sales channel",
+            "bodyVisibility": "Add Sales channels that display this post. You can further influence the visibility of the post in your Storefront sales channels using the link below",
+            "linkAdvancedVisibility": "Set Visibility for selected sales channels",
+            "textHeadline": "Blog display mode per sales channels",
+            "visibilityModalDescription": "“Hide in listing” will exclude the blog from blog overview listings but also from product sliders and cross selling lists. Selecting the option “Hide in listing and search” will also exclude the product from search actions. Blogs can still be reached via URL.",
+            "closeModal": "Apply"
+
+        },
+        "settingsForm": {
+            "labelActive": "Active"
+
+        },
+        "categoryForm": {
+            "categoriesTitle": "Subdivisions",
+            "descriptionCategories": "Add Subdivisions so that the post can be found in the storefront navigation or by API connections. Subdivisions you want to add should be available and active in the respective sales channel so you can select them here.",
+            "descriptionTags": "Tags help you find posts faster. with them it is easy to group posts and they can be used with the Rule Builder to automate tasks",
+            "labelSearchKeyword": "Search keywords",
+            "helpTextTags": "Tags are meant for internal use only. They can help you manage groups of blogs, apply rules or serve as custom search terms.",
+            "helpTextSearchKeyword": "The blog in the Storefront can also be found using these keywords.",
+            "placeholderTags": "Enter a tags",
+            "placeholderSearchKeywords": "Enter Keyword that find this blog",
+            "placeholderCategory": "Select Category",
+            "textEnterValidSearchKeyword": "Searchable keyword",
+            "textAddSearchKeyword": "Click here to add search keyword"
+        },
+        "detailBlogData": {
+            "cardDataTitle": "General",
+            "teaserInformationTitle": "Teaser Setting"
+        },
+        "layout": {
+            "title": "Layout assignment",
+            "subtitle": "You may change blog post pages by assigning custom layouts. If no custom layout is assigned here, the default layout will be used.",
+            "textNoConfig": "The currently selected layout does not have any editable elements",
+            "textContentInfo": "Default blog blocks are filled with blog data automatically. The actual contents are thus not listed here."
+        },
+        "layoutAssignment": {
+            "title": "Default value",
+            "subtitle": "Blog Page",
+            "textAssignLayout": "Assign layout",
+            "textChangeLayout": "Change layout",
+            "textEditInDesigner": "Edit in designer",
+            "textCreateNewLayout": "Create new layout"
+        },
+        "error": {
+            "title": "An error occurred.",
+            "action": {
+                "draft": "The draft could not be created.",
+                "saveAndPublish": "The draft could not be published.",
+                "getDrafts": "The drafts could not be loaded.",
+                "duplicateDraft": "The draft could not be duplicated.",
+                "merge": "The draft could not be overridden.",
+                "createNewLayout": "The new layout could not be created.",
+                "getSalesChannelUrl": "No sales channel URL could be found.",
+                "saveCmsPage": "The layout could not be updated.",
+                "updateFromParent": "The draft could not be updated by the main layout."
+            }
+        },
+        "blocks": {
+            "blog": {
+                "listing": {
+                    "label": "Full listing"
+                },
+                "teaserBox": {
+                    "label": "Teaser Box"
+                },
+                "singleBlog": {
+                    "label": "Single Blog"
+                },
+                "eecomBlogHeading": {
+                    "label": "Blog Heading"
+                },
+                "eecomBlogCategoryNavigation":
+                {
+                    "label": "Blog Subdivision Navigation",
+                    "preview":
+                    {
+                        "label":
+                        {
+                            "navigation": "Blog Navigation"
+                        }
+                    }
+                }
+            }
+        },
+        "elements": {
+            "listing": {
+                "config": {
+                    "paginationCount": "Pagination",
+                    "showType": {
+                        "label" : "Layout type"
+                    },
+                    "label":
+                    {
+                        "layoutTypeStandard": "Standard",
+                        "layoutTypeImage": "Big Image",
+                        "layoutTypeMinimal": "Minimal content"
+                    }
+                }
+            },
+            "teaserBox": {
+                "config":
+                {
+                    "blogAssignmentTypeOptions":
+                    {
+                        "manual" : "Manually Assignment",
+                        "auto" : "Automatic Assignment (New posts)"
+                    },
+                    "label":
+                    {
+                        "blogAssignmentType" : "Assignment type",
+                        "title": "Slider title",
+                        "blogLimit": "Amount of posts",
+                        "selection" : "Blog posts"
+                    },
+                    "placeholder":
+                    {
+                        "selection" : "Select blog ..."
+                    }
+                }
+
+            },
+            "eecomBlogHeading":
+            {
+                "label": "EECom Blog Name"
+
+            },
+            "eecomBlogSingle": {
+                "label":
+                {
+                    "selectFieldLabel" : "Blog post",
+                    "selectFieldPlaceholder" : "Search an select one blog post"
+                },
+                "config":
+                {
+                    "label":
+                    {
+                        "layoutTypeStandard": "Standard",
+                        "layoutTypeImage": "Big Image",
+                        "layoutTypeMinimal": "Minimal content",
+                        "displayMode" : "Display mode",
+                        "displayModeStandard": "Standard",
+                        "displayModeCover": "Cover",
+                        "displayModeContain": "Contain",
+                        "elMinLogoHeight": "Minimum height",
+                        "verticalAlign": "Vertical Align",
+                        "verticalAlignTop": "Top",
+                        "verticalAlignCenter": "Center",
+                        "verticalAlignBottom": "Bottom",
+                        "logoUrl": "Link to"
+                    },
+                    "placeholder":
+                    {
+                        "elMinLogoHeight": "Minimum height",
+                        "logoUrl": "Link to"
+                    }
+
+                }
+            },
+            "eecomBlogCategoryNav": {
+                "layout": {
+                    "config": {
+                        "tab":
+                        {
+                            "layout" : "Layout",
+                            "logo": "Logo"
+                        },
+                        "label":
+                        {
+                            "elMinHeight" : "Minimum height",
+                            "textColor": "Text Color",
+                            "bgPrimaryColor": "Background Color (Primary)",
+                            "bgColorGradiant": "Background Color (Optional, for vertical gradient)",
+                            "hoverPrimaryColor": "Hover Color (Primary)",
+                            "hoverColorGradiant": "Hover Color (Optional, for vertical gradient)"
+                        },
+                        "placeholder":
+                        {
+                            "elMinHeight" : "Minimum height",
+                            "textColor": "Text Color",
+                            "bgPrimaryColor": "Background Color (Primary)",
+                            "bgColorGradiant": "Background Color (Optional, for vertical gradient)",
+                            "hoverPrimaryColor": "Hover Color (Primary)",
+                            "hoverColorGradiant": "Hover Color (Optional, for vertical gradient)"
+                        }
+                    }
+                },
+                "logo":
+                {
+                    "config":
+                    {
+                        "label":
+                        {
+                            "displayMode" : "Display mode",
+                            "displayModeStandard": "Standard",
+                            "displayModeCover": "Cover",
+                            "displayModeContain": "Contain",
+                            "elMinLogoHeight": "Minimum height",
+                            "verticalAlignTop": "Top",
+                            "verticalAlignCenter": "Center",
+                            "verticalAlignBottom": "Bottom",
+                            "logoUrl": "Link to"
+                        },
+                        "placeholder":
+                        {
+                            "elMinLogoHeight": "Minimum height",
+                            "logoUrl": "Link to"
+                        }
+
+                    }
+                }
+            }
+        }
+    },
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-eecom-blog-detail-page": "EECom Blog detail page"
+        }
+    }
+
+
+}
