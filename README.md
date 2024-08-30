@@ -1,5 +1,6 @@
-#Shopware 6 Blog module.
-Installation: Uploading to folder custom/plugins/
+- Shopware 6 Blog module.
+- Installation: Uploading to folder custom/plugins/
+
 Console: 
 php bin/console plugin:refresh
 
